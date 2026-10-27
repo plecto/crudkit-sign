@@ -1,0 +1,72 @@
+{% extends "crudkit_sign/base.html" %}
+{% load static %}
+{% block title %}Sign {{ request_obj.title }}{% endblock %}
+{% block header_title %}{{ request_obj.title }}{% endblock %}
+{% block head %}
+<script type="module">
+  import * as pdfjsLib from "{{ pdfjs_url }}";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "{{ pdfjs_worker_url }}";
+  window.pdfjsLib = pdfjsLib;
+  window.dispatchEvent(new Event("pdfjs-ready"));
+</script>
+{% endblock %}
+{% block body %}
+<main class="cs-main">
+  <p class="cs-intro">
+    <strong>{{ signer.name }}</strong>, please review the document and complete the highlighted fields.
+    {% if request_obj.message %}<span class="cs-message">{{ request_obj.message|linebreaksbr }}</span>{% endif %}
+  </p>
+  <div id="cs-status" class="cs-status" role="status"></div>
+  <div id="cs-pages" class="cs-pages" aria-live="polite">Loading document…</div>
+</main>
+
+<footer class="cs-footer">
+  <label class="cs-consent">
+    <input type="checkbox" id="cs-consent">
+    <span>{{ consent_text }}</span>
+  </label>
+  <div class="cs-actions">
+    <button type="button" class="cs-link" id="cs-decline">Decline</button>
+    <button type="button" class="cs-button" id="cs-finish" disabled>Finish</button>
+  </div>
+</footer>
+
+<div class="cs-modal" id="cs-modal" hidden>
+  <div class="cs-modal-box" role="dialog" aria-modal="true" aria-labelledby="cs-modal-title">
+    <h2 id="cs-modal-title">Add your signature</h2>
+    <div class="cs-tabs">
+      <button type="button" class="cs-tab is-active" data-tab="draw">Draw</button>
+      <button type="button" class="cs-tab" data-tab="type">Type</button>
+    </div>
+    <div class="cs-pane" data-pane="draw">
+      <canvas id="cs-draw" width="600" height="200"></canvas>
+      <button type="button" class="cs-link" id="cs-clear">Clear</button>
+    </div>
+    <div class="cs-pane" data-pane="type" hidden>
+      <input type="text" id="cs-typed" placeholder="Type your name" autocomplete="name" maxlength="80">
+      <canvas id="cs-typed-preview" width="600" height="200"></canvas>
+    </div>
+    <div class="cs-modal-actions">
+      <button type="button" class="cs-link" id="cs-modal-cancel">Cancel</button>
+      <button type="button" class="cs-button" id="cs-modal-apply">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div class="cs-modal" id="cs-decline-modal" hidden>
+  <div class="cs-modal-box" role="dialog" aria-modal="true" aria-labelledby="cs-decline-title">
+    <h2 id="cs-decline-title">Decline to sign</h2>
+    <p>The sender will be told that you declined. This cannot be undone.</p>
+    <textarea id="cs-decline-reason" rows="3" placeholder="Reason (optional)" maxlength="1000"></textarea>
+    <div class="cs-modal-actions">
+      <button type="button" class="cs-link" id="cs-decline-cancel">Cancel</button>
+      <button type="button" class="cs-button cs-danger" id="cs-decline-confirm">Decline</button>
+    </div>
+  </div>
+</div>
+
+{{ config|json_script:"cs-config" }}
+{{ fields|json_script:"cs-fields" }}
+{{ completed|json_script:"cs-completed" }}
+<script src="{% static 'crudkit_sign/sign.js' %}" defer></script>
+{% endblock %}

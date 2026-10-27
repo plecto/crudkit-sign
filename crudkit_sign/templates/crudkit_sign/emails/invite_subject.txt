@@ -1,0 +1,1 @@
+{% autoescape off %}{% if reminder %}Reminder: {% endif %}{{ title }} is ready for your signature{% if brand_name %} ({{ brand_name }}){% endif %}{% endautoescape %}

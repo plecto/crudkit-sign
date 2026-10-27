@@ -1,0 +1,5 @@
+{% autoescape off %}{{ signer.name }} <{{ signer.email }}> declined to sign "{{ title }}".
+{% if reason %}
+Reason: {{ reason }}
+{% endif %}
+The request is closed. Create a new one to try again.{% endautoescape %}

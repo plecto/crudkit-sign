@@ -1,0 +1,23 @@
+{% extends "crudkit_sign/base.html" %}
+{% block title %}{{ request_obj.title }}{% endblock %}
+{% block header_title %}{{ request_obj.title }}{% endblock %}
+{% block body %}
+<main class="cs-main cs-centered">
+  {% if completed %}
+    <h1>All signatures collected</h1>
+    <p>Thank you, {{ signer.name }}. Everyone has signed and a copy has been emailed to all parties.</p>
+    {% if download_url %}
+      <p><a class="cs-button" href="{{ download_url }}">Download the signed document</a></p>
+    {% endif %}
+  {% elif signer.status == "Declined" %}
+    <h1>You declined to sign</h1>
+    <p>The sender has been notified.</p>
+  {% elif signer.status == "Signed" %}
+    <h1>Thank you, {{ signer.name }}</h1>
+    <p>Your signature has been recorded. You will receive the final document by email once everyone has signed.</p>
+  {% else %}
+    <h1>{{ request_obj.title }}</h1>
+    <p>This document is {{ request_obj.status|lower }}.</p>
+  {% endif %}
+</main>
+{% endblock %}

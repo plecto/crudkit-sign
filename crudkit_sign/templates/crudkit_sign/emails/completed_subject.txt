@@ -1,0 +1,1 @@
+{% autoescape off %}Signed: {{ title }}{% if brand_name %} ({{ brand_name }}){% endif %}{% endautoescape %}

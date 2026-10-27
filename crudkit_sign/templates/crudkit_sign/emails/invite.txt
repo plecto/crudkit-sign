@@ -1,0 +1,17 @@
+{% autoescape off %}Hi {{ signer.name }},
+
+{% if reminder %}This is a reminder that "{{ title }}" is waiting for your signature.{% else %}{% with sender=request.created_by.get_full_name|default:brand_name %}{% if sender %}{{ sender }} has sent you "{{ title }}" to sign.{% else %}"{{ title }}" is ready for your signature.{% endif %}{% endwith %}{% endif %}
+{% if message %}
+{{ message }}
+{% endif %}{% if signer.note %}
+{{ signer.note }}
+{% endif %}
+Review and sign here:
+
+{{ url }}
+{% if request.expires_at %}
+Please sign by {{ request.expires_at|date:"j F Y" }}.{% endif %}
+
+This link is personal to you. Please don't forward this email.
+{% if brand_name %}
+{{ brand_name }}{% endif %}{% endautoescape %}

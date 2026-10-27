@@ -1,0 +1,56 @@
+:root {
+  --cs-ink: #111827;
+  --cs-muted: #6b7280;
+  --cs-line: #e5e7eb;
+  --cs-bg: #f3f4f6;
+  --cs-accent: #2563eb;
+  --cs-accent-soft: rgba(37, 99, 235, 0.14);
+  --cs-danger: #b91c1c;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--cs-bg); color: var(--cs-ink); font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+.cs-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--cs-line); }
+.cs-logo { height: 28px; }
+.cs-brand { font-weight: 600; }
+.cs-title { color: var(--cs-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cs-main { max-width: 940px; margin: 0 auto; padding: 16px; padding-bottom: 140px; }
+.cs-centered { text-align: center; padding-top: 48px; }
+.cs-intro { margin: 0 0 12px; }
+.cs-message { display: block; margin-top: 6px; color: var(--cs-muted); }
+.cs-status { min-height: 1.5em; color: var(--cs-muted); }
+.cs-status.is-error { color: var(--cs-danger); }
+.cs-pages { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.cs-page { position: relative; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15); }
+.cs-page canvas { display: block; }
+.cs-field { position: absolute; display: flex; align-items: center; overflow: hidden; font-size: 12px; }
+.cs-field-done { color: var(--cs-ink); padding: 0 2px; }
+.cs-field-done img { max-width: 100%; max-height: 100%; object-fit: contain; object-position: left bottom; }
+.cs-field-own { background: var(--cs-accent-soft); outline: 2px dashed var(--cs-accent); outline-offset: -1px; padding: 0 2px; }
+.cs-field-own.is-filled { background: transparent; outline-style: solid; }
+.cs-field-own img { max-width: 100%; max-height: 100%; object-fit: contain; object-position: left bottom; cursor: pointer; }
+.cs-field-button { width: 100%; height: 100%; border: 0; background: transparent; color: var(--cs-accent); font: inherit; font-weight: 600; cursor: pointer; }
+.cs-field-own input[type="text"] { width: 100%; height: 100%; border: 0; background: transparent; font: inherit; font-size: 12px; padding: 0 2px; outline: none; }
+.cs-field-own input[type="checkbox"],
+.cs-field-own input[type="radio"] { width: 100%; height: 100%; margin: 0; }
+.cs-footer { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--cs-line); padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+.cs-consent { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--cs-muted); max-width: 640px; }
+.cs-consent input { margin-top: 3px; }
+.cs-actions { display: flex; gap: 12px; align-items: center; margin-left: auto; }
+.cs-button { display: inline-block; padding: 10px 18px; border: 0; border-radius: 6px; background: var(--cs-ink); color: #fff; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.cs-button:disabled { opacity: 0.4; cursor: not-allowed; }
+.cs-button.cs-danger { background: var(--cs-danger); }
+.cs-link { border: 0; background: none; color: var(--cs-muted); font: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
+.cs-modal { position: fixed; inset: 0; background: rgba(17, 24, 39, 0.5); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 10; }
+.cs-modal[hidden] { display: none; }
+.cs-modal-box { background: #fff; border-radius: 8px; padding: 20px; width: 100%; max-width: 640px; }
+.cs-modal-box h2 { margin: 0 0 12px; font-size: 18px; }
+.cs-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.cs-tab { border: 1px solid var(--cs-line); background: #fff; border-radius: 6px; padding: 6px 12px; font: inherit; cursor: pointer; }
+.cs-tab.is-active { border-color: var(--cs-ink); font-weight: 600; }
+.cs-pane canvas { display: block; width: 100%; height: auto; aspect-ratio: 3 / 1; border: 1px solid var(--cs-line); border-radius: 6px; background: #fff; touch-action: none; }
+.cs-pane input[type="text"], .cs-modal-box textarea { width: 100%; padding: 10px; border: 1px solid var(--cs-line); border-radius: 6px; font: inherit; margin-bottom: 12px; }
+.cs-modal-actions { display: flex; justify-content: flex-end; gap: 16px; align-items: center; margin-top: 16px; }
+@media (max-width: 600px) {
+  .cs-main { padding-bottom: 180px; }
+  .cs-actions { width: 100%; justify-content: space-between; }
+}

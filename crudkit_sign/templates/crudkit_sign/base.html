@@ -1,0 +1,19 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}Sign{% endblock %}{% if brand_name %} · {{ brand_name }}{% endif %}</title>
+  <link rel="stylesheet" href="{% static 'crudkit_sign/sign.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="cs-header">
+    {% if logo_url %}<img class="cs-logo" src="{{ logo_url }}" alt="">{% endif %}
+    <span class="cs-brand">{{ brand_name }}</span>
+    <span class="cs-title">{% block header_title %}{% endblock %}</span>
+  </header>
+  {% block body %}{% endblock %}
+</body>
+</html>

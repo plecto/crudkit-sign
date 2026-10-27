@@ -1,0 +1,7 @@
+{% extends "crudkit_sign/emails/base.html" %}
+{% block preheader %}{{ title }} has been signed by all parties.{% endblock %}
+{% block content %}
+<h1 style="margin: 0 0 20px; font-size: 22px; line-height: 1.3; font-weight: 600; color: #111827;">The document has been signed</h1>
+<p style="margin: 0 0 16px;"><strong>{{ title }}</strong> has been signed by all parties.</p>
+<p style="margin: 0;">The signed document is attached, with a certificate of completion on the last page. Keep it for your records.</p>
+{% endblock %}
